@@ -10,24 +10,35 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.converter.scalars.ScalarsConverterFactory
 import retrofit2.http.GET
+import retrofit2.http.PUT
+import retrofit2.http.POST
+import retrofit2.http.DELETE
 
-private const val BASE_URL = "https://api.thecatapi.com";
+private const val BASE_URL = "https://hu5nnerv6b.execute-api.us-west-2.amazonaws.com/Prod"
+
 
 private val moshi = Moshi.Builder().add(KotlinJsonAdapterFactory()).build()
 
 private val retrofit =
-                Retrofit.Builder()
-                                .addConverterFactory(ScalarsConverterFactory.create())
-                                .addConverterFactory(MoshiConverterFactory.create(moshi))
-                                .addCallAdapterFactory(CoroutineCallAdapterFactory())
-                                .baseUrl(BASE_URL)
-                                .build()
+    Retrofit.Builder()
+        .addConverterFactory(ScalarsConverterFactory.create())
+        .addConverterFactory(MoshiConverterFactory.create(moshi))
+        .addCallAdapterFactory(CoroutineCallAdapterFactory())
+        .baseUrl(BASE_URL)
+        .build()
 
 interface CatApiService {
-        @GET("/v1/images/search")
-        fun getCats(): Deferred<Response<ResponseBody>>
+    @GET("/devices")
+
+    @POST("/devices")
+
+    @GET("/devices/deviceid")
+
+    @PUT("/devices/deviceid")
+
+    @DELETE("/devices/deviceid")
 }
 
 object CatApi {
-        val retrofitService: CatApiService by lazy { retrofit.create(CatApiService::class.java) }
+    val retrofitService: CatApiService by lazy { retrofit.create(CatApiService::class.java) }
 }
