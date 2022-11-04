@@ -29,14 +29,32 @@ private val retrofit =
 
 interface CatApiService {
     @GET("/devices")
+    fun getDevices(
+
+    );
 
     @POST("/devices")
+    fun postDevices(
 
-    @GET("/devices/deviceid")
+    );
 
-    @PUT("/devices/deviceid")
+    @GET("/devices/{deviceid}")
+    fun getDeviceById(
+        @Path("deviceid") id: String
 
-    @DELETE("/devices/deviceid")
+    );
+
+    @PUT("/devices/{deviceid}")
+    fun updateDeviceById(
+        @Path("deviceid") id: String
+
+    );
+
+    @DELETE("/devices/{deviceid}")
+    fun deleteDeviceById(
+        @Path("deviceid") id: String
+
+    );
 }
 
 object CatApi {
